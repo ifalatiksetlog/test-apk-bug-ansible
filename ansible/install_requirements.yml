@@ -1,0 +1,33 @@
+---
+
+- name: Install requirements
+  community.general.apk:
+    name: "ca-certificates, less, ncurses-terminfo-base, krb5-libs, libgcc, libintl, libssl1.1, libstdc++, tzdata, userspace-rcu, zlib, icu-libs, tar"
+    state: present
+    no_cache: true
+  become: true
+  register: apk_install
+
+- name: Debug apk_install
+  ansible.builtin.debug:
+    var: apk_install
+
+- name: Get file information on /etc/apk/world
+  ansible.builtin.stat:
+    path: /etc/apk/world
+  register: apk_world_file_stat
+
+- name: Get file contents of /etc/apk/world
+  ansible.builtin.slurp:
+    src: /etc/apk/world
+  register: apk_world_file_contents
+
+- name: Debug apk_world_file_stat
+  ansible.builtin.debug:
+    var: apk_world_file_stat
+
+- name: Debug apk_world_file_contents
+  ansible.builtin.debug:
+    var: apk_world_file_contents
+
+...

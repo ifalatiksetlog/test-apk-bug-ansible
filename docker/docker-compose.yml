@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  alpine-service:
+    container_name: alpine-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # keep container running
+    command: tail -F anything

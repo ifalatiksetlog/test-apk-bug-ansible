@@ -1,0 +1,14 @@
+---
+
+- name: Install requirements
+  hosts: [all]
+  gather_facts: true
+  tasks:
+    - name: Include install requirements
+      ansible.builtin.include_tasks:
+        file: install_requirements.yml
+    - name: Include install requirements again to check for idempotence
+      ansible.builtin.include_tasks:
+        file: install_requirements.yml
+
+...
